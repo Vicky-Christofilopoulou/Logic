@@ -1,0 +1,28 @@
+assign(report_stderr, 2).
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 150).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+% --- Axioms for ?? ---
+all x all y all z (-(P(x,y)) | -(Q(x,z)) | R(x,c1)).
+
+% --- Negation of ?? ---
+P(c2,y) & Q(c2,z) & -R(c2,w).
+
+% --- Goal: Prove inconsistency ---
+% The system will try to find a contradiction, proving that ?? ? ??.
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+

@@ -1,0 +1,134 @@
+============================== Prover9 ===============================
+Prover9 (32) version Dec-2007, Dec 2007.
+Process 16572 was started by vicky on LAPTOP-5RP38OED,
+Wed Dec 18 10:50:04 2024
+The command was "/cygdrive/c/Program Files (x86)/Prover9-Mace4/bin-win32/prover9".
+============================== end of head ===========================
+
+============================== INPUT =================================
+assign(report_stderr,2).
+set(ignore_option_dependencies).
+if(Prover9).
+% Conditional input included.
+assign(max_seconds,150).
+end_if.
+if(Mace4).
+% Conditional input omitted.
+end_if.
+
+formulas(assumptions).
+(all x all y all z (-P(x,y) | -Q(x,z) | R(x,c1))).
+P(c2,y) & Q(c2,z) & -R(c2,w).
+end_of_list.
+
+formulas(goals).
+end_of_list.
+
+============================== end of input ==========================
+
+% Enabling option dependencies (ignore applies only on input).
+
+============================== PROCESS NON-CLAUSAL FORMULAS ==========
+
+% Formulas that are not ordinary clauses:
+1 (all x all y all z (-P(x,y) | -Q(x,z) | R(x,c1))) # label(non_clause).  [assumption].
+2 P(c2,y) & Q(c2,z) & -R(c2,w) # label(non_clause).  [assumption].
+
+============================== end of process non-clausal formulas ===
+
+============================== PROCESS INITIAL CLAUSES ===============
+
+% Clauses before input processing:
+
+formulas(usable).
+end_of_list.
+
+formulas(sos).
+-P(x,y) | -Q(x,z) | R(x,c1).  [clausify(1)].
+P(c2,x).  [clausify(2)].
+Q(c2,x).  [clausify(2)].
+-R(c2,x).  [clausify(2)].
+end_of_list.
+
+formulas(demodulators).
+end_of_list.
+
+============================== PREDICATE ELIMINATION =================
+
+Eliminating P/2
+3 P(c2,x).  [clausify(2)].
+4 -P(x,y) | -Q(x,z) | R(x,c1).  [clausify(1)].
+Derived: -Q(c2,x) | R(c2,c1).  [resolve(3,a,4,a)].
+
+Eliminating Q/2
+5 -Q(c2,x) | R(c2,c1).  [resolve(3,a,4,a)].
+6 Q(c2,x).  [clausify(2)].
+Derived: R(c2,c1).  [resolve(5,a,6,a)].
+
+Eliminating R/2
+7 R(c2,c1).  [resolve(5,a,6,a)].
+8 -R(c2,x).  [clausify(2)].
+Derived: $F.  [resolve(7,a,8,a)].
+
+============================== end predicate elimination =============
+
+Auto_denials:  (no changes).
+
+Term ordering decisions:
+Predicate symbol precedence:  predicate_order([ ]).
+Function symbol precedence:  function_order([ ]).
+After inverse_order:  (no changes).
+Unfolding symbols: (none).
+
+Auto_inference settings:
+  % set(neg_binary_resolution).  % (HNE depth_diff=0)
+  % clear(ordered_res).  % (HNE depth_diff=0)
+  % set(ur_resolution).  % (HNE depth_diff=0)
+    % set(ur_resolution) -> set(pos_ur_resolution).
+    % set(ur_resolution) -> set(neg_ur_resolution).
+
+Auto_process settings:  (no changes).
+
+============================== PROOF =================================
+
+% Proof 1 at 0.00 (+ 0.00) seconds.
+% Length of proof is 9.
+% Level of proof is 4.
+% Maximum clause weight is 0.
+% Given clauses 0.
+
+1 (all x all y all z (-P(x,y) | -Q(x,z) | R(x,c1))) # label(non_clause).  [assumption].
+2 P(c2,y) & Q(c2,z) & -R(c2,w) # label(non_clause).  [assumption].
+3 P(c2,x).  [clausify(2)].
+4 -P(x,y) | -Q(x,z) | R(x,c1).  [clausify(1)].
+5 -Q(c2,x) | R(c2,c1).  [resolve(3,a,4,a)].
+6 Q(c2,x).  [clausify(2)].
+7 R(c2,c1).  [resolve(5,a,6,a)].
+8 -R(c2,x).  [clausify(2)].
+9 $F.  [resolve(7,a,8,a)].
+
+============================== end of proof ==========================
+
+============================== STATISTICS ============================
+
+Given=0. Generated=1. Kept=0. proofs=1.
+Usable=0. Sos=0. Demods=0. Limbo=0, Disabled=7. Hints=0.
+Weight_deleted=0. Literals_deleted=0.
+Forward_subsumed=0. Back_subsumed=0.
+Sos_limit_deleted=0. Sos_displaced=0. Sos_removed=0.
+New_demodulators=0 (0 lex), Back_demodulated=0. Back_unit_deleted=0.
+Demod_attempts=0. Demod_rewrites=0.
+Res_instance_prunes=0. Para_instance_prunes=0. Basic_paramod_prunes=0.
+Nonunit_fsub_feature_tests=0. Nonunit_bsub_feature_tests=0.
+Megabytes=0.01.
+User_CPU=0.00, System_CPU=0.00, Wall_clock=0.
+
+============================== end of statistics =====================
+
+============================== end of search =========================
+
+THEOREM PROVED
+
+Exiting with 1 proof.
+
+Process 16572 exit (max_proofs) Wed Dec 18 10:50:05 2024
